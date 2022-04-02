@@ -1,0 +1,348 @@
+" 总是显示状态栏
+set laststatus=2
+
+" 显示光标当前位置
+set ruler
+
+" 开启行号显示
+set number
+
+" 高亮显示当前行/列
+set cursorline
+set cursorcolumn
+
+" 高亮显示搜索结果
+set hlsearch
+
+" 禁止折行
+set nowrap
+
+" 语法分析
+
+" 开启语法高亮功能
+syntax enable
+" 允许用指定语法高亮配色方案替换默认方案
+syntax on
+
+" 缩进
+" 自适应不同语言的智能缩进
+filetype indent on
+
+" 将制表符扩展为空格
+set expandtab
+" 设置编辑时制表符占用空格数
+set tabstop=4
+" 设置格式化时制表符占用空格数
+set shiftwidth=4
+" 让 vim 把连续数量的空格视为一个制表符
+set softtabstop=4
+
+" 营造专注气氛
+" 禁止光标闪烁
+set gcr=a:block-blinkon0
+
+" 禁止显示滚动条
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+
+" 禁止显示菜单和工具条
+set guioptions-=m
+set guioptions-=T
+
+" 全屏开/关快捷键
+map <silent> <F11> :call ToggleFullscreen()<CR>
+"" 启动 vim 时自动全屏
+"autocmd VimEnter * call ToggleFullscreen()
+
+" 让配置变更立即生效
+autocmd BufWritePost $HOME/.vimrc source $HOME/.vimrc
+
+" 插件安装
+" vundle 环境设置
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+" vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+" 编辑器主题
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+" Plugin 'vim-scripts/phd'
+"Plugin 'chriskempson/base16-vim'
+" tmux交互
+" Plugin 'benmills/vimux'
+" 美化状态栏
+"Plugin 'vim-airline/vim-airline'"
+"Plugin 'vim-airline/vim-airline-themes'
+" 括号颜色
+Plugin 'kien/rainbow_parentheses.vim'
+" 代码缩进
+Plugin 'nathanaelkane/vim-indent-guides'
+" 代码格式化 pip install autopep8
+"Plugin 'Chiel92/vim-autoformat'"
+" 书签
+" Plugin 'kshenoy/vim-signature'
+" Plugin 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines'
+" 基于标签的标识符列表
+"Plugin 'majutsushi/tagbar'
+"Plugin 'vim-scripts/indexer.tar.gz'
+"Plugin 'vim-scripts/DfrankUtil'
+"Plugin 'vim-scripts/vimprj'
+" 全局查找
+"Plugin 'dyng/ctrlsf.vim'
+" 快捷替换
+"Plugin 'terryma/vim-multiple-cursors'
+" 快速注释
+" Plugin 'scrooloose/nerdcommenter'
+" 绘制图像 :Distart，开始绘制，可用方向键绘制线条，空格键绘制或擦除字符；:Distop，停止绘制
+" Plugin 'vim-scripts/DrawIt'
+" 代码模板自动补全
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
+" 智能补全
+"Plugin 'Valloric/YouCompleteMe'
+" 由接口快速生成实现类框架
+" Plugin 'derekwyatt/vim-protodef'
+" Plugin 'derekwyatt/vim-fswitch'
+" 目录树
+Plugin 'scrooloose/nerdtree'
+" 多文档编辑
+" Plugin 'fholgado/minibufexpl.vim'
+
+" Plugin 'gcmt/wildfire.vim'
+" 支持分支的撤销
+" Plugin 'sjl/gundo.vim'
+" markdown插件
+" Plugin 'suan/vim-instant-markdown'
+" git命令
+" Plugin 'tpope/vim-fugitive'
+
+" Plugin 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
+" Plugin 'elzr/vim-json', {'for' : 'json'}
+" Plugin 'fatih/vim-go'
+" Plugin 'fatih/vim-nginx' , {'for' : 'nginx'}
+" Plugin 'fatih/vim-hclfmt'
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'jelera/vim-javascript-syntax'
+
+" 插件列表结束
+call vundle#end()
+filetype plugin indent on
+
+" 开启实时搜索功能
+set incsearch
+
+" 搜索时大小写不敏感
+set ignorecase
+
+" 关闭兼容模式
+set nocompatible
+set backspace=indent,eol,start
+
+" vim 自身命令行模式智能补全
+set wildmenu
+
+" 配色方案
+set t_Co=256
+let g:rehash256 = 1
+let g:molokai_original = 1
+
+set background=dark
+"colorscheme solarized
+colorscheme molokai
+"colorscheme phd
+
+
+" 设置快捷键
+let mapleader=";"
+" 定义快捷键到行首和行尾
+nmap LF 0
+nmap LE $
+
+" 跳到文章开头和末尾
+nmap HF gg
+nmap HE G
+
+" 设置Visual模式下非递归映射快捷键将选中文本块复制至系统剪贴板
+vnoremap <Leader>y "+y
+" 设置快捷键将系统剪贴板内容粘贴至vim
+nmap <Leader>p "+p
+
+" 定义快捷键关闭当前分割窗口
+nmap <Leader>q :q<CR>
+" 定义快捷键保存当前窗口内容
+nmap <Leader>w :w<CR>
+" 定义快捷键保存所有窗口内容并退出 vim
+nmap <Leader>WQ :wa<CR>:q<CR>
+" 不做任何保存，直接退出 vim
+nmap <Leader>Q :qa!<CR>
+
+" 设置Normal模式下非递归映射快捷键遍历子窗口
+" 依次遍历
+nnoremap nw <C-W><C-W>
+" 跳转至右方的窗口
+nnoremap <Leader>lw <C-W>l
+" 跳转至方的窗口
+nnoremap <Leader>hw <C-W>h
+" 跳转至上方的子窗口
+nnoremap <Leader>kw <C-W>k
+" 跳转至下方的子窗口
+nnoremap <Leader>jw <C-W>j
+
+" 定义快捷键在结对符之间跳转
+nmap <Leader>M %
+
+" 代码格式化
+nnoremap <leader>f :Autoformat<CR>
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+
+
+" 工程文件浏览
+" 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
+nmap <Leader>fl :NERDTreeToggle<CR>
+" 设置 NERDTree 子窗口宽度
+let NERDTreeWinSize=22
+" 设置 NERDTree 子窗口位置
+let NERDTreeWinPos="right"
+" 显示隐藏文件
+let NERDTreeShowHidden=1
+" NERDTree 子窗口中不显示冗余帮助信息
+let NERDTreeMinimalUI=1
+" 删除文件时自动删除文件对应 buffer
+let NERDTreeAutoDeleteBuffer=1
+
+" 多文档编辑
+" 显示/隐藏 MiniBufExplorer 窗口
+map <Leader>bl :MBEToggle<cr>
+
+" buffer 切换快捷键
+map <C-Tab> :MBEbn<cr>
+map <C-S-Tab> :MBEbp<cr>
+
+" 环境恢复
+" 设置环境保存项
+set sessionoptions="blank,globals,localoptions,tabpages,sesdir,folds,help,options,resize,winpos,winsize"
+
+" 保存 undo 历史。必须先行创建 .undo_history/
+if has('persistent_undo')
+    set undodir=~/.undo_history/
+    set undofile
+endif
+
+
+" 新增文件自动生成注释
+autocmd BufNewFile *.[ch],*.hpp,*.cpp,Makefile,*.mk,*.sh,*.lua,*.py exec ":call SetFileHeader()" 
+" 定位到文件末尾
+autocmd BufNewFile * normal G
+
+" 加入注释 
+func! SetComment()
+	call setline(1,"/*================================================================") 
+    	call append(line("."),   "*   Copyright (C) ".strftime("%Y").". All rights reserved.")
+	call append(line(".")+1, "*   ") 
+	call append(line(".")+2, "*   FileName：".expand("%:t")) 
+	call append(line(".")+3, "*   Author  ：yrzx404")
+	call append(line(".")+4, "*   Date    ：".strftime("%Y/%m/%d/")) 
+	call append(line(".")+5, "*   Desc    ：") 
+	call append(line(".")+6, "*")
+	call append(line(".")+7, "================================================================*/") 
+	call append(line(".")+8, "")
+	call append(line(".")+9, "")
+endfunc
+
+" 加入shell,Makefile注释
+func! SetComment_Sh()
+	call setline(3, "#================================================================") 
+	call setline(4, "#   Copyright (C) ".strftime("%Y").". All rights reserved.")
+	call setline(5, "#   ") 
+	call setline(6, "#   FileName：".expand("%:t")) 
+	call setline(7, "#   Author  ：yrzx404")
+	call setline(8, "#   Date    ：".strftime("%Y/%m/%d/")) 
+	call setline(9, "#   Desc    ：") 
+	call setline(10, "#")
+	call setline(11, "#================================================================")
+	call setline(12, "")
+	call setline(13, "")
+endfunc
+
+" 加入lua注释
+func! SetComment_Lua()
+	call setline(1, "-----------------------------------------------------------------") 
+	call setline(2, "--   Copyright (C) ".strftime("%Y").". All rights reserved.")
+	call setline(3, "--   ") 
+	call setline(4, "--   FileName：".expand("%:t")) 
+	call setline(5, "--   Author  ：yrzx404")
+	call setline(6, "--   Date    ：".strftime("%Y/%m/%d/")) 
+	call setline(7, "--   Desc    ：") 
+	call setline(8, "--")
+	call setline(9, "-----------------------------------------------------------------")
+	call setline(10, "")
+	call setline(11, "")
+endfunc 
+
+" 加入python注释
+func! SetComment_Python()
+	call setline(3, "#================================================================") 
+	call setline(4, "#   Copyright (C) ".strftime("%Y").". All rights reserved.")
+	call setline(5, "#   ") 
+	call setline(6, "#   FileName：".expand("%:t")) 
+	call setline(7, "#   Author  ：yrzx404")
+	call setline(8, "#   Date    ：".strftime("%Y/%m/%d/")) 
+	call setline(9, "#   Desc    ：") 
+	call setline(10, "#")
+	call setline(11, "#================================================================")
+	call setline(12, "")
+	call setline(13, "")
+endfunc 
+
+
+
+" 自动插入文件头 
+func! SetFileHeader()
+	if &filetype == 'make'
+		call setline(1,"") 
+		call setline(2,"")
+		call SetComment_Sh()
+ 
+	elseif &filetype == 'sh'
+		call setline(1,"#!/system/bin/sh") 
+		call setline(2,"")
+		call SetComment_Sh()
+
+	elseif &filetype == 'lua'
+		call SetComment_Lua()
+
+    elseif &filetype == 'python'
+		call setline(1,"#!/usr/bin/env python")
+        call setline(2,"#encoding:utf-8")
+		call SetComment_Python()
+
+	else
+	     call SetComment()
+	     if expand("%:e") == 'hpp'
+              call append(line(".")+10, "#ifndef _".toupper(expand("%:t:r"))."_H") 
+              call append(line(".")+11, "#define _".toupper(expand("%:t:r"))."_H") 
+              call append(line(".")+12, "#ifdef __cplusplus") 
+              call append(line(".")+13, "extern \"C\"") 
+              call append(line(".")+14, "{") 
+              call append(line(".")+15, "#endif") 
+              call append(line(".")+16, "") 
+              call append(line(".")+17, "#ifdef __cplusplus") 
+              call append(line(".")+18, "}") 
+              call append(line(".")+19, "#endif") 
+              call append(line(".")+20, "#endif //".toupper(expand("%:t:r"))."_H") 
+     
+	     elseif expand("%:e") == 'h'
+            call append(line(".")+10, "#pragma once") 
+	     elseif &filetype == 'c'
+            call append(line(".")+10,"#include \"".expand("%:t:r").".h\"") 
+	     elseif &filetype == 'cpp'
+            call append(line(".")+10, "#include \"".expand("%:t:r").".h\"") 
+	     endif
+	endif
+endfunc
